@@ -53,6 +53,18 @@ class UserController:
             return f'У Пользователя изменён {kwargs} на {id} '
         except:
             return 'Ошибка изменения пользователя'
+    @classmethod
+    def update_status(cls, id):
+        '''
+        меняет у потльзователя статус с True на False и c False на True
+        :param id: id пользователя
+        :return:
+            новый статус пользователя
+        '''
+        status = User.get_by_id(id).is_active # Получаем по id пользователя его значения поля is_active (True/False)
+        status = not status
+        User.update({User.is_active:status})
+        return f'Статус пользователя стал {status}'
 
 
 
@@ -63,7 +75,8 @@ if __name__ == "__main__":
     #     password='admin',
     #     role='Администратор'
     # ))
-    print(UserController.update(1, login="admin"))
+    # print(UserController.update(1, login="admin"))
+    print(UserController.update_status(2))
     # for row in UserController.get():
     #     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
 
