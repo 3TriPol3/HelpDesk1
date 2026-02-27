@@ -62,11 +62,22 @@ class UserController:
             новый статус пользователя
         '''
         status = User.get_by_id(id).is_active # Получаем по id пользователя его значения поля is_active (True/False)
-        status = not status
-        User.update({User.is_active:status})
+        User.update({User.is_active:not status}).where(User.id==id).execute()
         return f'Статус пользователя стал {status}'
 
+    @classmethod
+    def auth(cls, login, password):
+        '''
 
+        :param login:
+        :param password:
+        :return:
+        '''
+        user = User.select().where(User.login == login)[0]
+        if user:
+            if user.password == password:
+                return "Есть такой пользователь"
+        return 'Неверный логин или пароль'
 
 
 if __name__ == "__main__":
@@ -76,7 +87,8 @@ if __name__ == "__main__":
     #     role='Администратор'
     # ))
     # print(UserController.update(1, login="admin"))
-    print(UserController.update_status(2))
+    # print(UserController.update_status(2))
+    print(UserController.auth('admin', 'admin'))
     # for row in UserController.get():
     #     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
 
