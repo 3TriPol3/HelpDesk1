@@ -1,5 +1,6 @@
-from Models import User
+from Models.Category import Category
 from Models.Base import *
+from Models.User import User
 
 class Task(BaseModel):
     id = PrimaryKeyField()
