@@ -1,3 +1,5 @@
+import CASCADE
+
 from Models.Category import Category
 from Models.Base import *
 from Models.User import User
@@ -17,7 +19,7 @@ class Task(BaseModel):
         'В работе',
         'Выполнена'
     ])
-    user_id = ForeignKeyField(model=User)
-    speciality_id = ForeignKeyField(model=User)
-    category_id = ForeignKeyField(model=Category)
+    user_id = ForeignKeyField(model=User, on_delete=CASCADE, on_update=CASCADE)
+    speciality_id = ForeignKeyField(model=User, on_delete=CASCADE, on_update=CASCADE)
+    category_id = ForeignKeyField(model=Category, on_delete=CASCADE, on_update=CASCADE)
 
