@@ -73,7 +73,9 @@ class UserController:
         :param password:
         :return:
         '''
-        user = User.select().where(User.login == login)[0]
+        # user = User.select().where(User.login == login)[0]
+        user = User.get_or_none(login)
+        print(user)
         if user:
             if user.password == password:
                 return "Есть такой пользователь"
@@ -88,7 +90,9 @@ if __name__ == "__main__":
     # ))
     # print(UserController.update(1, login="admin"))
     # print(UserController.update_status(2))
-    print(UserController.auth('admin', 'admin'))
+
+    print(UserController.auth('admin', 'admin1'))
+
     # for row in UserController.get():
     #     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
 
