@@ -20,3 +20,4 @@ class Task(BaseModel):
     user_id = ForeignKeyField(model=User)
     speciality_id = ForeignKeyField(model=User)
     category_id = ForeignKeyField(model=Category)
+
