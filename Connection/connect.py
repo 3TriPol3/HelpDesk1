@@ -1,10 +1,23 @@
+import peewee
 from peewee import *
 
-mysql_db = MySQLDatabase('BessM82_HelpDesk',
-                         user='BessM82_HelpDesk',
-                         password='111111',
-                         host='10.11.13.118',
-                         port=3306)
-if __name__ == "__main__":
-    print(mysql_db.connect())
+# Первый способ
+# mysql_db = MySQLDatabase('BessM82_HelpDesk',
+#                          user='BessM82_HelpDesk',
+#                          password='111111',
+#                          host='10.11.13.118')
 
+# Второй способ
+def connect():
+    try: # Удачная попытка
+        mysql_db = MySQLDatabase('BessM82_HelpDesk',
+                                 user='BessM82_HelpDesk',
+                                 password='111111',
+                                 host='10.11.13.118')
+        return mysql_db
+    except OperationalError as error: # Неудачная попытка
+        print(f'Ошибка')
+
+
+if __name__ == "__main__":
+    print(connect().connect())
