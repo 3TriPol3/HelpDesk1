@@ -1,5 +1,5 @@
 from Connection.connect import *
 
 class BaseModel(Model):
-    class Meta:
-        database = mysql_db
+    class Meta: # Передаёт следующие метаданные
+        database = connect()

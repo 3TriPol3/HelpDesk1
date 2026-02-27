@@ -15,8 +15,9 @@ def connect():
                                  password='111111',
                                  host='10.11.13.118')
         return mysql_db
-    except OperationalError as error: # Неудачная попытка
+    except: # Неудачная попытка
         print(f'Ошибка')
+        return None
 
 
 if __name__ == "__main__":
