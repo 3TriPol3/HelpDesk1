@@ -36,15 +36,34 @@ class UserController:
         except:
             return 'Ошибка добавления пользователя'
 
+    @classmethod
+    def update(cls, id, **kwargs):
+        '''
+
+        :param id: по id пользователя будет происходить изменение значений записи в таблице
+        :param kwargs: Вводится название поля и его новое значение (например: login = "новый_логин")
+                за один вызов метода можно изменить несколько полей одной записи
+        :return:
+            возвращаем сообщение об изменениях пользователя
+            если ошибка - возвращаем текст ошибки
+        '''
+        try:
+            for key, value in kwargs.items(): # key - название столбца/поля, value - новое значение, kwargs.items() - аргументы в виде списка словарей
+                User.update({key:value}).where(User.id == id).execute()
+            return f'У Пользователя изменён {kwargs} на {id} '
+        except:
+            return 'Ошибка изменения пользователя'
 
 
 
 
 if __name__ == "__main__":
-    print(UserController.registration(
-        login='admin1',
-        password='admin',
-        role='Администратор'
-    ))
-    for row in UserController.get():
-        print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
+    # print(UserController.registration(
+    #     login='admin1',
+    #     password='admin',
+    #     role='Администратор'
+    # ))
+    print(UserController.update(1, login="admin"))
+    # for row in UserController.get():
+    #     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
+
