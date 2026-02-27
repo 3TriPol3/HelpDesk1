@@ -74,7 +74,7 @@ class UserController:
         :return:
         '''
         # user = User.select().where(User.login == login)[0]
-        user = User.get_or_none(login)
+        user = User.get_or_none(User.login==login)
         print(user)
         if user:
             if user.password == password:
