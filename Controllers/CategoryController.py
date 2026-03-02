@@ -59,7 +59,7 @@ class CategoryController:
 
 if __name__ == "__main__":
     # print(CategoryController.add(     # Create
-    #     name='Техника'
+    #     name='ПК'
     # ))
 
     for row in CategoryController.get():    # Read
@@ -68,3 +68,4 @@ if __name__ == "__main__":
     print(CategoryController.update(2, name="Техника"))     # Update
 
     # print(CategoryController.delete(2))   # Delete
+
