@@ -35,7 +35,7 @@ class TaskController:
                 priority=priority,
                 status=status
             )
-            return f'Заявка {topic} со статусом {status} добавлена'
+            return f'Заявка: <{topic}>, со статусом: <{status}>, добавлена'
         except:
             print("Ошибка добавления заявки!!!")
 
@@ -57,18 +57,6 @@ class TaskController:
             return 'Ошибка измениния заявки'
 
     @classmethod
-    def update_status(cls, id, status):
-        '''
-        меняет у заявки статус
-        :param id: id заявки
-        :param status: Статус заявки
-        :return:
-            новый статус заявки
-        '''
-        status = Task.update(status).where(Task.id == id).execute()
-        return f'Статус заявки стал {status}'
-
-    @classmethod
     def delete(cls, id):
         '''
         Удаление заявки по id
@@ -76,7 +64,6 @@ class TaskController:
         :return:
         '''
         Task.delete_by_id(id)
-
 
 
     # @classmethod
@@ -111,14 +98,14 @@ class TaskController:
 
 
 if __name__ == "__main__":
-    print(TaskController.add(
-        topic='Сломалась мышка',
-        description='Мышка перестала работать',
-        path='D/User/ProgramFiles'
-    ))
-    # print(TaskController.update(2,priority = "Средний"))
-    # print(TaskController.update_status(2, "В работе"))
+    # print(TaskController.add(
+    #     topic='Не работает принтер',
+    #     description='принтер перестал работать',
+    #     path='С/User/ProgramFiles'
+    # ))
+    # print(TaskController.update(3,priority = "Высокий"))
+    # print(TaskController.update(2, status="В работе"))
 
-    # for row in TaskController.get():
-    #     print(row.id, row.topic, row.description, row.path, row.priority, row.status)
+    for row in TaskController.get():
+        print(row.id, row.topic, row.description, row.path, row.priority, row.status)
 

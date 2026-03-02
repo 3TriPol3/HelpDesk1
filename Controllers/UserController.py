@@ -33,7 +33,7 @@ class UserController:
                 password = hash_password,
                 role = role
             )
-            return f'Пользователь {login} с ролью {role} добавлен'
+            return f'Пользователь: <{login}>, с ролью: <{role}>, добавлен'
         except:
             return 'Ошибка добавления пользователя!!!'
         User.create(
