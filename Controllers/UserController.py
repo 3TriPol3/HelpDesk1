@@ -35,7 +35,7 @@ class UserController:
             )
             return f'Пользователь {login} с ролью {role} добавлен'
         except:
-            return 'Ошибка добавления пользователя'
+            return 'Ошибка добавления пользователя!!!'
         User.create(
             login=login,
             password=password,
@@ -100,7 +100,11 @@ class UserController:
         return 'Неверный логин или пароль'
     @classmethod
     def test_hesh(cls, password):
-#             Хештруем пароль password
+        '''
+        Хештруем пароль password
+        :param password: пароль
+        :return:
+        '''
         print(password)
         password = bytes(password,'utf-8')
         hashed = hashpw(password,gensalt())

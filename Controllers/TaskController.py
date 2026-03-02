@@ -35,8 +35,9 @@ class TaskController:
                 priority=priority,
                 status=status
             )
+            return f'Заявка {topic} со статусом {status} добавлена'
         except:
-            print("Ошибка добавления заявки")
+            print("Ошибка добавления заявки!!!")
 
     @classmethod
     def update(cls,id,**kwargs): # update
@@ -78,31 +79,35 @@ class TaskController:
 
 
 
-    @classmethod
-    def auth(cls,login,password):
-        '''
-        :param login:
-        :param password:
-        :return:
-        '''
-        # task = Task.select().where(Task.login == login)[0]
-        task = Task.get_or_none(Task.login==login)
-        if task:
-            hash_password = task.password
-            if checkpw(password.encode('utf-8'),hash_password.encode('utf-8')):
-                return "Есть такой пользователь"
-
-        return 'Неверный логин или пароль'
-
-    @classmethod
-    def test_hesh(cls, password):
-#             Хештруем пароль password
-        print(password)
-        password = bytes(password,'utf-8')
-        hashed = hashpw(password,gensalt())
-        print(hashed)
-        if checkpw(password,hashed):
-            print('Работет')
+    # @classmethod
+    # def auth(cls,login,password):
+    #     '''
+    #     :param login:
+    #     :param password:
+    #     :return:
+    #     '''
+    #     # task = Task.select().where(Task.login == login)[0]
+    #     task = Task.get_or_none(Task.login==login)
+    #     if task:
+    #         hash_password = task.password
+    #         if checkpw(password.encode('utf-8'),hash_password.encode('utf-8')):
+    #             return "Есть такой пользователь"
+    #
+    #     return 'Неверный логин или пароль'
+    #
+    # @classmethod
+    # def test_hesh(cls, password):
+    #     '''
+    #     Хештруем пароль password
+    #     :param password: пароль
+    #     :return:
+    #     '''
+    #     print(password)
+    #     password = bytes(password,'utf-8')
+    #     hashed = hashpw(password,gensalt())
+    #     print(hashed)
+    #     if checkpw(password,hashed):
+    #         print('Работет')
 
 
 if __name__ == "__main__":
@@ -116,9 +121,4 @@ if __name__ == "__main__":
 
     # for row in TaskController.get():
     #     print(row.id, row.topic, row.description, row.path, row.priority, row.status)
-
-
-    # print(TaskController.auth('admin','admin'))
-    # TaskController.test_hesh('1234')
-    # print(TaskController.auth('user','user'))
 
