@@ -8,5 +8,6 @@ connect().create_tables(
         User,
         Task,
         Category
+
     ]
 )

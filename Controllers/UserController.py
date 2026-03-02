@@ -1,10 +1,11 @@
 from Models.User import User
-
+from bcrypt import hashpw,gensalt, checkpw
 
 class UserController:
     '''
-    Класс для работы с пользователем
+    Класс для работы с пользователями
     Реализация CRUD
+
     '''
     @classmethod
     def get(cls):
@@ -14,59 +15,65 @@ class UserController:
             список пользователей (объект)
         '''
         return User.select()
-
     @classmethod
-    def registration(cls, login, password, role = 'Пользователь'): # add
+    def registration(cls, login, password,role = 'Пользователь'):
         '''
-
-        :param login: логин пользователя, не более 10 символов, должен быть уникален
+        :param login:  логин пользователя не более 10 символов, должен быть уникален
         :param password: пароль в будущем должен быть в виде HASH пароль
-        :param role: Роль в системе, если не указана, то: "Пользователь"
+        :param role: роль в системе, если не указана, то: "Пользователь"
         :return:
             если ошибка - возвращаем текст ошибки
             иначе - возвращаем сообщение о созданном пользователе
         '''
         try:
+            hash_password = hashpw(password.encode('utf-8'), gensalt()) # введённый прароль
+            print(hash_password)
             User.create(
                 login = login,
-                password = password,
+                password = hash_password,
                 role = role
             )
             return f'Пользователь {login} с ролью {role} добавлен'
         except:
             return 'Ошибка добавления пользователя'
-
+        User.create(
+            login=login,
+            password=password,
+            role=role
+        )
     @classmethod
-    def update(cls, id, **kwargs):
+    def update(cls,id,**kwargs):
         '''
 
-        :param id: по id пользователя будет происходить изменение значений записи в таблице
-        :param kwargs: Вводится название поля и его новое значение (например: login = "новый_логин")
+        :param id: по id пользователя будет происходить изменение занчений записи в таблицы
+        :param kwargs: вводится название поля и его новое занчение (например: login = "новый_логин")
                 за один вызов метода можно изменить несколько полей одной записи
         :return:
-            возвращаем сообщение об изменениях пользователя
+            возвращаем сообщение об изменениях пользователе
             если ошибка - возвращаем текст ошибки
+
         '''
         try:
-            for key, value in kwargs.items(): # key - название столбца/поля, value - новое значение, kwargs.items() - аргументы в виде списка словарей
+            for key, value in kwargs.items():# key - название столбца/поля, value - новое значение,  kwargs.items() - аргументы в виде списка словарей
                 User.update({key:value}).where(User.id == id).execute()
-            return f'У Пользователя изменён {kwargs} на {id} '
-        except:
-            return 'Ошибка изменения пользователя'
+            return f'У Пользователя изменен {kwargs} на {kwargs[key]} '
+        except :
+            return 'Ошибка измениния пользователя'
     @classmethod
-    def update_status(cls, id):
+    def update_status(cls,id):
         '''
-        меняет у потльзователя статус с True на False и c False на True
+        меняет у порльзователя статус с True на False или с False на True
         :param id: id пользователя
         :return:
             новый статус пользователя
+
         '''
-        status = User.get_by_id(id).is_active # Получаем по id пользователя его значения поля is_active (True/False)
+        status = User.get_by_id(id).is_active # получаем по id пользователя его значения поля is_active (True/False)
         User.update({User.is_active:not status}).where(User.id==id).execute()
         return f'Статус пользователя стал {status}'
 
     @classmethod
-    def auth(cls, login, password):
+    def auth(cls,login,password):
         '''
 
         :param login:
@@ -75,24 +82,36 @@ class UserController:
         '''
         # user = User.select().where(User.login == login)[0]
         user = User.get_or_none(User.login==login)
-        print(user)
+
         if user:
-            if user.password == password:
+            hash_password = user.password
+            if checkpw(password.encode('utf-8'),hash_password.encode('utf-8')):
                 return "Есть такой пользователь"
+
         return 'Неверный логин или пароль'
+    @classmethod
+    def test_hesh(cls, password):
+#             Хештруем проль password
+        print(password)
+        password = bytes(password,'utf-8')
+        hashed = hashpw(password,gensalt())
+        print(hashed)
+        if checkpw(password,hashed):
+            print('Работет')
+
 
 
 if __name__ == "__main__":
-    # print(UserController.registration(
-    #     login='admin1',
-    #     password='admin',
-    #     role='Администратор'
-    # ))
-    # print(UserController.update(1, login="admin"))
+    print(UserController.registration(
+        login='user',
+        password='user'
+    ))
+    # print(UserController.update(2,login = "admin2"))
     # print(UserController.update_status(2))
-
-    print(UserController.auth('admin', 'admin1'))
-
+    # UserController.test_hesh('1234')
+    # print(UserController.auth('admin','admin'))
     # for row in UserController.get():
     #     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
+
+    print(UserController.auth('user','user'))
 
