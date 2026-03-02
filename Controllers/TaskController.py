@@ -1,5 +1,4 @@
 from Models.Task import Task
-from bcrypt import hashpw,gensalt, checkpw
 
 class TaskController:
     '''
@@ -8,16 +7,7 @@ class TaskController:
     '''
 
     @classmethod
-    def get(cls): # read
-        '''
-        Вывод списка заявок из таблицы Task
-        :return:
-            список заявок (объект)
-        '''
-        return Task.select()
-
-    @classmethod
-    def add(cls, topic, description, path, priority = 'Низкий', status = 'Новая'): # add
+    def add(cls, topic, description, path, priority='Низкий', status='Новая'):  # add
         '''
 
         :param topic: тема
@@ -38,6 +28,15 @@ class TaskController:
             return f'Заявка: <{topic}>, со статусом: <{status}>, добавлена'
         except:
             print("Ошибка добавления заявки!!!")
+
+    @classmethod
+    def get(cls): # read
+        '''
+        Вывод списка заявок из таблицы Task
+        :return:
+            список заявок (объект)
+        '''
+        return Task.select()
 
     @classmethod
     def update(cls,id,**kwargs): # update

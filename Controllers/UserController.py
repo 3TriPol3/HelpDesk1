@@ -7,16 +7,9 @@ class UserController:
     Реализация CRUD
 
     '''
+
     @classmethod
-    def get(cls): # read
-        '''
-        Вывод списка пользователей из таблицы User
-        :return:
-            список пользователей (объект)
-        '''
-        return User.select()
-    @classmethod
-    def registration(cls, login, password,role = 'Пользователь'): # add
+    def registration(cls, login, password, role='Пользователь'):  # add
         '''
         :param login:  логин пользователя не более 10 символов, должен быть уникален
         :param password: пароль в будущем должен быть в виде HASH пароль
@@ -26,12 +19,12 @@ class UserController:
             иначе - возвращаем сообщение о созданном пользователе
         '''
         try:
-            hash_password = hashpw(password.encode('utf-8'), gensalt()) # введённый прароль
+            hash_password = hashpw(password.encode('utf-8'), gensalt())  # введённый прароль
             print(hash_password)
             User.create(
-                login = login,
-                password = hash_password,
-                role = role
+                login=login,
+                password=hash_password,
+                role=role
             )
             return f'Пользователь: <{login}>, с ролью: <{role}>, добавлен'
         except:
@@ -41,6 +34,16 @@ class UserController:
             password=password,
             role=role
         )
+
+    @classmethod
+    def get(cls): # read
+        '''
+        Вывод списка пользователей из таблицы User
+        :return:
+            список пользователей (объект)
+        '''
+        return User.select()
+
     @classmethod
     def update(cls,id,**kwargs): # update
         '''
