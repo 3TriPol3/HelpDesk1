@@ -60,7 +60,7 @@ class UserController:
         except :
             return 'Ошибка измениния пользователя'
     @classmethod
-    def update_status(cls,id):
+    def update_status_user(cls,id):
         '''
         меняет у порльзователя статус с True на False или с False на True
         :param id: id пользователя
@@ -68,9 +68,18 @@ class UserController:
             новый статус пользователя
 
         '''
-        status = User.get_by_id(id).is_active # получаем по id пользователя его значения поля is_active (True/False)
-        User.update({User.is_active:not status}).where(User.id==id).execute()
-        return f'Статус пользователя стал {status}'
+        status_user = User.get_by_id(id).is_active # получаем по id пользователя его значения поля is_active (True/False)
+        User.update({User.is_active:not status_user}).where(User.id==id).execute()
+        return f'Статус пользователя стал {status_user}'
+
+    @classmethod
+    def delete(cls, id):
+        '''
+        Удаление заявки по id
+        :param id: id заявки
+        :return:
+        '''
+        User.delete_by_id(id)
 
     @classmethod
     def auth(cls,login,password):
@@ -91,7 +100,7 @@ class UserController:
         return 'Неверный логин или пароль'
     @classmethod
     def test_hesh(cls, password):
-#             Хештруем проль password
+#             Хештруем пароль password
         print(password)
         password = bytes(password,'utf-8')
         hashed = hashpw(password,gensalt())
@@ -107,7 +116,7 @@ if __name__ == "__main__":
         password='admin2'
     ))
     # print(UserController.update(2,login = "admin2"))
-    # print(UserController.update_status(2))
+    # print(UserController.update_status_user(2))
     # UserController.test_hesh('1234')
     # print(UserController.auth('admin','admin'))
     # for row in UserController.get():
