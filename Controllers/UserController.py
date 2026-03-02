@@ -103,8 +103,8 @@ class UserController:
 
 if __name__ == "__main__":
     print(UserController.registration(
-        login='user',
-        password='user'
+        login='admin2',
+        password='admin2'
     ))
     # print(UserController.update(2,login = "admin2"))
     # print(UserController.update_status(2))
