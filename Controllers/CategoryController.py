@@ -7,7 +7,7 @@ class CategoryController:
     '''
 
     @classmethod
-    def add(cls, name): # add
+    def add(cls, name): # Create
         '''
         Добавление категории
         :param name: Название категории
@@ -22,7 +22,7 @@ class CategoryController:
             print("Ошибка добавления категории!!!")
 
     @classmethod
-    def get(cls):  # read
+    def get(cls):  # Read
         '''
         Вывод списка категорий из таблицы Category
         :return:
@@ -31,7 +31,7 @@ class CategoryController:
         return Category.select()
 
     @classmethod
-    def update(cls,id,**kwargs): # update
+    def update(cls,id,**kwargs): # Update
         '''
         :param id: по id категории будет происходить изменение значений записи в таблицы
         :param kwargs: вводится название поля и его новое значение
@@ -48,7 +48,7 @@ class CategoryController:
             return 'Ошибка измениния категории!!!'
 
     @classmethod
-    def delete(cls, id):
+    def delete(cls, id):    # Delete
         '''
         Удаление категории по id
         :param id: id категории

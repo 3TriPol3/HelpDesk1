@@ -9,7 +9,7 @@ class UserController:
     '''
 
     @classmethod
-    def registration(cls, login, password, role='Пользователь'):  # add
+    def registration(cls, login, password, role='Пользователь'):  # Create
         '''
         Добавление пользователя
         :param login:  логин пользователя не более 10 символов, должен быть уникален
@@ -37,7 +37,7 @@ class UserController:
         )
 
     @classmethod
-    def get(cls): # read
+    def get(cls): # Read
         '''
         Вывод списка пользователей из таблицы User
         :return:
@@ -46,7 +46,7 @@ class UserController:
         return User.select()
 
     @classmethod
-    def update(cls,id,**kwargs): # update
+    def update(cls,id,**kwargs): # Update
         '''
 
         :param id: по id пользователя будет происходить изменение занчений записи в таблицы
@@ -64,7 +64,7 @@ class UserController:
         except :
             return 'Ошибка измениния пользователя'
     @classmethod
-    def update_status_user(cls,id):
+    def update_status_user(cls,id): # Update
         '''
         меняет у порльзователя статус с True на False или с False на True
         :param id: id пользователя
@@ -77,7 +77,7 @@ class UserController:
         return f'Статус пользователя стал {status_user}'
 
     @classmethod
-    def delete(cls, id):
+    def delete(cls, id):   # Delete
         '''
         Удаление заявки по id
         :param id: id заявки

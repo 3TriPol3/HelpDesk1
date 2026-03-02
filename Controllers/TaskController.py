@@ -7,7 +7,7 @@ class TaskController:
     '''
 
     @classmethod
-    def add(cls, topic, description, path, priority='Низкий', status='Новая'):  # add
+    def add(cls, topic, description, path, priority='Низкий', status='Новая'):  # Create
         '''
         Добавление заявки
         :param topic: тема
@@ -30,7 +30,7 @@ class TaskController:
             print("Ошибка добавления заявки!!!")
 
     @classmethod
-    def get(cls): # read
+    def get(cls): # Read
         '''
         Вывод списка заявок из таблицы Task
         :return:
@@ -39,7 +39,7 @@ class TaskController:
         return Task.select()
 
     @classmethod
-    def update(cls,id,**kwargs): # update
+    def update(cls,id,**kwargs): # Update
         '''
         :param id: по id заявки будет происходить изменение занчений записи в таблицы
         :param kwargs: вводится название поля и его новое значение
@@ -56,7 +56,7 @@ class TaskController:
             return 'Ошибка измениния заявки'
 
     @classmethod
-    def delete(cls, id):
+    def delete(cls, id):    # Delete
         '''
         Удаление заявки по id
         :param id: id заявки
