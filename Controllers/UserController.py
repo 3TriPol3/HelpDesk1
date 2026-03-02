@@ -8,7 +8,7 @@ class UserController:
 
     '''
     @classmethod
-    def get(cls):
+    def get(cls): # read
         '''
         Вывод списка пользователей из таблицы User
         :return:
@@ -16,7 +16,7 @@ class UserController:
         '''
         return User.select()
     @classmethod
-    def registration(cls, login, password,role = 'Пользователь'):
+    def registration(cls, login, password,role = 'Пользователь'): # add
         '''
         :param login:  логин пользователя не более 10 символов, должен быть уникален
         :param password: пароль в будущем должен быть в виде HASH пароль
@@ -42,7 +42,7 @@ class UserController:
             role=role
         )
     @classmethod
-    def update(cls,id,**kwargs):
+    def update(cls,id,**kwargs): # update
         '''
 
         :param id: по id пользователя будет происходить изменение занчений записи в таблицы
