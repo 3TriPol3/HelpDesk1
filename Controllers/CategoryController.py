@@ -58,11 +58,13 @@ class CategoryController:
 
 
 if __name__ == "__main__":
-    # print(CategoryController.add(
+    # print(CategoryController.add(     # Create
     #     name='Техника'
     # ))
 
-    print(CategoryController.update(2, name="Техника"))
-
-    for row in CategoryController.get():
+    for row in CategoryController.get():    # Read
         print(row.id, row.name)
+
+    print(CategoryController.update(2, name="Техника"))     # Update
+
+    # print(CategoryController.delete(2))   # Delete

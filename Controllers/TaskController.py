@@ -97,14 +97,19 @@ class TaskController:
 
 
 if __name__ == "__main__":
-    # print(TaskController.add(
+    # print(TaskController.add(     # Create
     #     topic='Не работает принтер',
     #     description='принтер перестал работать',
     #     path='С/User/ProgramFiles'
     # ))
-    # print(TaskController.update(3,priority = "Высокий"))
-    # print(TaskController.update(2, status="В работе"))
 
-    for row in TaskController.get():
+    for row in TaskController.get():    # Read
         print(row.id, row.topic, row.description, row.path, row.priority, row.status)
+
+    # print(TaskController.update(3,priority = "Высокий"))      # Update
+    # print(TaskController.update(2, status="В работе"))    # Update
+
+    # print(TaskController.delete(2))   # Delete
+
+
 

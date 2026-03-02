@@ -118,16 +118,21 @@ class UserController:
 
 
 if __name__ == "__main__":
-    print(UserController.registration(
-        login='admin2',
-        password='admin2'
-    ))
-    # print(UserController.update(2,login = "admin2"))
-    # print(UserController.update_status_user(2))
-    # UserController.test_hesh('1234')
-    # print(UserController.auth('admin','admin'))
-    # for row in UserController.get():
+    # print(UserController.registration(    # Create
+    #     login='admin2',
+    #     password='admin2'
+    # ))
+
+    # for row in UserController.get():  # Read
     #     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
 
+    # print(UserController.update(2,login = "admin2"))  # Update
+    # print(UserController.update_status_user(2))
+
+    # print(UserController.delete(2))   # Delete
+
+    # UserController.test_hesh('1234')
+    # print(UserController.auth('admin','admin'))
     print(UserController.auth('user','user'))
+
 
