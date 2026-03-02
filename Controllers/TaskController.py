@@ -9,7 +9,7 @@ class TaskController:
     @classmethod
     def add(cls, topic, description, path, priority='Низкий', status='Новая'):  # add
         '''
-
+        Добавление заявки
         :param topic: тема
         :param description: описание
         :param path: путь
