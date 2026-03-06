@@ -14,18 +14,41 @@ _Краткое наименование: __ИС «TechSupport»__._
 + User
     1. id(int:11)
     2. login(varchar:12)
-    3. password
+    3. password(varchar:255)
     4. role
-      Можно выбрать из трёх вариантов:
-    - 'Пользователь',
-    - 'Администратор',
-    - 'Специалист'
+       Можно выбрать из трёх вариантов:
+       - 'Пользователь',
+       - 'Администратор',
+       - 'Специалист'
+    5. is_active
+    6. fullname(varchar:150)
     
 + Task
+    1. id(int:11)
+    2. topic(varchar:100) 
+    3. description
+    4. path(varchar:255) 
+    5. priority
+       Можно выбрать из трёх вариантов:
+       - 'Низкий',
+       - 'Средний',
+       - 'Высокий'
+    6. status
+       Можно выбрать из трёх вариантов:
+       - 'Новая',
+       - 'В работе',
+       - 'Выполнена'
+    7. user_id
+    8. speciality_id
+    9. category_id
+
 + Category
+    1. id(int:11)  
+    2. name(varchar:150)
+
+
 ### Структура проекта
 ```commandline
-
 HelpDesk1/
 |--Connection/
 |   |--connect.py                       # Подключение к БД
@@ -42,7 +65,6 @@ HelpDesk1/
 |--Views/
 |   |--HelpDesk1_view.py                # Главное Окно
 |--main.py                              # Главный файл запуска
-
 ```
 
 
