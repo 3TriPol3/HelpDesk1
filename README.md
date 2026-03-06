@@ -33,18 +33,22 @@ HelpDesk1/
 |   |--UserController.py                # Контроллер для работы с пользователем    
 |   |--CategoryController.py            # Контроллер для работы с категориями заявок 
 |   |--TaskController.py                # Контроллер для работы с заявками 
+
+
 ...
 
 
-
 ```
+
+
 ### Технологии
 - **Python** - основной язык программирования
 - **Peewee** - ORM для работы с Базой данных
 - **MySQL** - СУБД
 - **PyMysql** - библиотека для подключения к СУДБ
-- **Tkinter** -
-- **bcrypt** -
+- **Tkinter** - библиотека для создания графических интерфейсов (GUI)
+- **bcrypt** - библиоткека для хеширования паролей
+
 
 ### Модели
 #### User (Пользователи)
@@ -56,14 +60,14 @@ HelpDesk1/
 - `fullname` - Полное имя пользователя, максимум 150 символов
 - #### Task (Заявки)
 - `id` - Первичный ключ
-- `topic` - Первичный ключ
-- `description` - Первичный ключ
-- `path` - Первичный ключ
-- `priority` - Первичный ключ
-- `status` - Первичный ключ
-- `user_id` - Первичный ключ
-- `speciality_id` - Первичный ключ
-- `category_id` - Первичный ключ
+- `topic` - Тема заявки
+- `description` - Описание заявки
+- `path` - Путь
+- `priority` - Приоритет заявки
+- `status` - Статус заявки
+- `user_id` - Ссылка на таблицу пользователей
+- `speciality_id` - Ссылка на таблицу Специалистов
+- `category_id` - Ссылка на таблицу Категорий
 #### Category (Категории)
 - `id` - Первичный ключ
 - `name` - Название категории
@@ -71,18 +75,19 @@ HelpDesk1/
 
 ## Установка
 1. Все библиотеки указаны в файле `requirements.txt`
-2. Подключение к БД в `Connection/connect.py`
+2. Подключение к БД в `HelpDesk1/Connection/connect.py`
 3. Создать таблицы в БД с помощью
     ```bash
-    python Models/create_table.py 
+    python HelpDesk1/Models/create_table.py 
     ```
+   
 
 ## Функционал кода
 ### Работа с пользователями
-Отвечает UserController
+Отвечает **UserController**
 ```python
-# Регистрация пользователя Администратор
 from Controllers.UserController import UserController
+# Регистрация пользователя Администратор
 UserController.registration(    # Create
         login='admin2',
         password='admin2'
@@ -93,8 +98,64 @@ for row in UserController.get():  # Read
     print(row.id, row.login, row.password, row.role, row.is_active, row.fullname)
     
 # Обновить данные пользователя
-UserController.update(2,login = "admin2")
+UserController.update(2,login = "admin2")   # Update
+
+# Удаление пользователей
+UserController.delete(2)    # Delete
+
+# Авторизация
+print(UserController.auth('user','user'))
+
+# Тест хэша
+UserController.test_hesh('1234')
+
+
 ```
 
+### Работа с заявками
+Отвечает **TaskController**
+```python
+from Controllers.TaskController import TaskController
+# Создание новой заявки
+print(TaskController.add(     # Create
+    topic='Не работает принтер',
+    description='принтер перестал работать',
+    path='С/User/ProgramFiles'
+))
+
+# Вывод списка пользователей
+for row in TaskController.get():    # Read
+    print(row.id, row.topic, row.description, row.path, row.priority, row.status)
+    
+# Обновить данные заявки    
+TaskController.update(3,priority = "Высокий")   # Update
+
+# Удаление заявок
+TaskController.delete(1) # Delete
+
+```
+
+### Работа с категориями
+Отвечает **CategoryController**
+```python
+from Controllers.CategoryController import CategoryController
+# Создание новой категории
+print(CategoryController.add(     # Create
+    name='ПК'
+))
+
+# Вывод списка категорий
+for row in CategoryController.get():    # Read
+    print(row.id, row.name)
+    
+# Обновить данные категории    
+CategoryController.update(2, name="Техника")    # Update
+
+# Удаление категорий
+CategoryController.delete(1)    # Delete
+
+```
+
+
 ## Лицензия
-Проект находится в разработке
+Проект находится: **в разработке**
