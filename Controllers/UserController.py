@@ -29,7 +29,7 @@ class UserController:
             )
             return f'Пользователь: <{login}>, с ролью: <{role}>, добавлен'
         except:
-            return 'Ошибка добавления пользователя!!!'
+            return 'Ошибка добавления пользователя!'
         User.create(
             login=login,
             password=password,
@@ -62,7 +62,7 @@ class UserController:
                 User.update({key:value}).where(User.id == id).execute()
             return f'У Пользователя изменен {kwargs} на {kwargs[key]} '
         except :
-            return 'Ошибка измениния пользователя'
+            return 'Ошибка измениния пользователя!'
     @classmethod
     def update_status_user(cls,id): # Update
         '''

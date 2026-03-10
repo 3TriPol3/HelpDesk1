@@ -19,7 +19,7 @@ class CategoryController:
             )
             return f'Категория: <{name}>, добавлена'
         except:
-            print("Ошибка добавления категории!!!")
+            print("Ошибка добавления категории!")
 
     @classmethod
     def get(cls):  # Read
@@ -45,7 +45,7 @@ class CategoryController:
                 Category.update({key:value}).where(Category.id == id).execute()
             return f'У категории изменено {kwargs} на {kwargs[key]} '
         except :
-            return 'Ошибка измениния категории!!!'
+            return 'Ошибка измениния категории!'
 
     @classmethod
     def delete(cls, id):    # Delete
