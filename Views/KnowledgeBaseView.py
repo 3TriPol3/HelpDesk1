@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk
 
 from Controllers.UserController import *
+from Controllers.TaskController import *
+from Controllers.CategoryController import *
 
 
 class UserView(Tk):
