@@ -9,5 +9,5 @@ class UserView(Tk):
         super().__init__()
 
         # Атрибуты окна
-        self.title("Техническая поддержка")
+        self.title("Авторизация")
         self.geometry("1280x850")

@@ -1,4 +1,4 @@
-from Views.HelpDesk1_view import HelpDesk1_view
+from Views.AuthorizationView import HelpDesk1_view
 
 window = HelpDesk1_view()
 window.mainloop()
