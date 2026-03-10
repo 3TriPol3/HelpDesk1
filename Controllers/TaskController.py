@@ -27,7 +27,7 @@ class TaskController:
             )
             return f'Заявка: <{topic}>, со статусом: <{status}>, добавлена'
         except:
-            print("Ошибка добавления заявки!!!")
+            print("Ошибка добавления заявки!")
 
     @classmethod
     def get(cls): # Read
@@ -53,7 +53,7 @@ class TaskController:
                 Task.update({key:value}).where(Task.id == id).execute()
             return f'У заявки изменен {kwargs} на {kwargs[key]} '
         except :
-            return 'Ошибка измениния заявки'
+            return 'Ошибка измениния заявки!'
 
     @classmethod
     def delete(cls, id):    # Delete
